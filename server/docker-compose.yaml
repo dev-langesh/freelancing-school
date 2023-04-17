@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  backend:
+    image: devlangesh/school
+    build: .
+    container_name: school
+    env_file: .env
+    ports:
+      - 8000:8000
+
+  mongodb:
+    image: mongo
+    container_name: mongo
+    # ports:
+    #   - 27017:27017

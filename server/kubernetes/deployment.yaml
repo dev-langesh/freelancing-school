@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: school
+spec:
+  selector:
+    matchLabels:
+      app: school
+  template:
+    metadata:
+      labels:
+        app: school
+    spec:
+      containers:
+        - name: school
+          image: devlangesh/school
+          env:
+            - name: PORT
+              value: "8000"
+            - name: MONGO_URI
+              value: mongodb+srv://langesh:langesh@cluster0.vsn1uqo.mongodb.net/?retryWrites=true&w=majority
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8000
