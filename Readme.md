@@ -10,8 +10,9 @@
 1. create .env file inside server
 2. paste the following variables
 
-`    PORT=8000
-     MOGNO_URI=mongodb://localhsot:27017`
+```  PORT=8000
+     MOGNO_URI=mongodb://localhsot:27017
+```
 
 Node: If you are using mongodb atlas paste the Mongodb URI in the .env file
 
