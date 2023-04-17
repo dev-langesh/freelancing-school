@@ -11,8 +11,6 @@ async function loadCourses() {
     );
 
     const courses = await Course.create(JSON.parse(data.toString()));
-
-    console.log(courses);
   }
 }
 

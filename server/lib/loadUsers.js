@@ -11,8 +11,6 @@ async function loadUsers() {
     );
 
     const users = await User.create(JSON.parse(data.toString()));
-
-    console.log(users);
   }
 }
 
