@@ -60,7 +60,7 @@ export default function FilterCourse({ setCourses }) {
             name="code"
             onChange={changeHandler}
             type="text"
-            className="border bg-gray-900 w-28 text-white"
+            className="border bg-gray-900 w-28 text-white border-slate-500 px-1"
           />
         </div>
         <div>
@@ -71,7 +71,7 @@ export default function FilterCourse({ setCourses }) {
             type="text"
             name="num"
             onChange={changeHandler}
-            className="border bg-transparent w-28 text-white"
+            className="border bg-transparent w-28 text-white border-slate-500 px-1"
           />
         </div>
 

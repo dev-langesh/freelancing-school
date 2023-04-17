@@ -27,8 +27,6 @@ async function registerCourse(req, res) {
 
     const body = req.body.course;
 
-    console.log(body);
-
     const user = await User.findById(id);
 
     if (!user || !id) {

@@ -6,7 +6,7 @@ async function registerUser(req, res) {
     const { username, password } = req.body;
 
     if (!username || !password) {
-      throw new Error("fill all the fields");
+      throw new Error("Fill all the fields");
     }
 
     const usernameTaken = await User.findOne({ username });
@@ -28,13 +28,13 @@ async function login(req, res) {
     const { username, password } = req.body;
 
     if (!username || !password) {
-      throw new Error("fill all the fields");
+      throw new Error("Fill all the fields");
     }
 
     const user = await User.findOne({ username });
 
     if (!user) {
-      return res.status(404).json({ error: "not found" });
+      return res.status(404).json({ error: "User not found" });
     }
 
     if (password !== user.password) {
