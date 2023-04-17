@@ -4,7 +4,7 @@ import axios from "axios";
 import FilterCourse from "./FilterCourse";
 
 export default function CourseContainer() {
-  const [courses, setcourses] = useState([]);
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     async function getCourses() {
@@ -13,25 +13,24 @@ export default function CourseContainer() {
       const req = await axios.get(url);
 
       if (!req.data.error) {
-        setcourses(req.data);
+        setCourses(req.data);
       }
     }
 
     getCourses();
   }, []);
 
-  if (courses.length !== 0)
-    return (
-      <section className="p-6 space-y-6">
-        <h1 className="font-bold text-xl">Courses</h1>
-        <FilterCourse />
-        <ListCourses courses={courses} />;
-      </section>
-    );
-
   return (
-    <h1 className="text-center font-bold text-slate-500 text-xl p-6">
-      No courses found
-    </h1>
+    <section className="p-6 space-y-6">
+      <h1 className="font-bold text-xl">Courses</h1>
+      <FilterCourse setCourses={setCourses} />
+      {courses.length !== 0 ? (
+        <ListCourses courses={courses} />
+      ) : (
+        <h1 className="text-center font-bold text-slate-500 text-xl p-6">
+          No courses found
+        </h1>
+      )}
+    </section>
   );
 }

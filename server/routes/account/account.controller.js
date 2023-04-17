@@ -27,6 +27,8 @@ async function registerCourse(req, res) {
 
     const body = req.body.course;
 
+    console.log(body);
+
     const user = await User.findById(id);
 
     if (!user || !id) {
@@ -49,7 +51,7 @@ async function registerCourse(req, res) {
 
     if (courseExists) {
       console.log("exists", courseExists);
-      return res.status(401).json({ error: "course exists" });
+      return res.status(401).json({ error: "Already Enrolled" });
     }
 
     const updatedUser = await User.findByIdAndUpdate(
@@ -58,7 +60,9 @@ async function registerCourse(req, res) {
       { new: true }
     );
 
-    return res.status(200).json(updatedUser);
+    return res
+      .status(200)
+      .json({ message: "Successfully Enrolled", updatedUser });
   } catch (err) {
     if (err) res.json({ error: err.message });
   }

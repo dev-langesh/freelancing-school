@@ -10,7 +10,7 @@ export default function Header() {
   }
 
   return (
-    <div className="flex justify-end py-2 px-6">
+    <div className="flex justify-end py-4 px-6">
       {auth.logged ? (
         <button
           onClick={logout}
