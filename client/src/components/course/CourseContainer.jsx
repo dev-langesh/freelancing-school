@@ -24,13 +24,7 @@ export default function CourseContainer() {
     <section className="p-6 space-y-6">
       <h1 className="font-bold text-xl">Courses</h1>
       <FilterCourse setCourses={setCourses} />
-      {courses.length !== 0 ? (
-        <ListCourses courses={courses} />
-      ) : (
-        <h1 className="text-center font-bold text-slate-500 text-xl p-6">
-          No courses found
-        </h1>
-      )}
+      <ListCourses courses={courses} />
     </section>
   );
 }

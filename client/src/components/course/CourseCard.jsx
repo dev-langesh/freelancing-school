@@ -5,8 +5,17 @@ import { AuthContext } from "../../context/AuthContextProvider";
 import axios from "axios";
 import ErrorHandler from "../handlers/ErrorHandler";
 import SuccessHandler from "../handlers/SuccessHandler";
+import CloseIcon from "@mui/icons-material/Close";
 
-export default function CourseCard({ num, code, name, description, credits }) {
+export default function CourseCard({
+  mode,
+  num,
+  code,
+  name,
+  description,
+  credits,
+  setCourses,
+}) {
   const auth = useContext(AuthContext);
   const [error, setError] = useState({ message: "", open: false });
   const [success, setSuccess] = useState({ message: "", open: false });
@@ -43,6 +52,39 @@ export default function CourseCard({ num, code, name, description, credits }) {
     }
   }
 
+  async function unEnrollCourse() {
+    const url = `${import.meta.env.VITE_SERVER_URL}/account/${
+      auth.userId
+    }/courses/remove`;
+
+    const payload = {
+      course: {
+        num,
+        code,
+        name,
+        description,
+        credits,
+      },
+    };
+
+    const req = await fetch(url, {
+      method: "PATCH",
+      body: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await req.json();
+
+    if (data.error) {
+      setError({ open: true, message: data.error });
+    } else {
+      setSuccess({ open: true, message: data.message });
+      setCourses(data.courses);
+    }
+  }
+
   return (
     <section className="w-full shadow-xl shadow-black border-l-4 border-blue-400 p-4">
       <h1 className="text-blue-500 font-bold">{name}</h1>
@@ -56,11 +98,16 @@ export default function CourseCard({ num, code, name, description, credits }) {
         <p className="text-slate-500 font-bold text-sm">
           Course number: <span className="text-slate-300">{num}</span>
         </p>
-        {auth.logged && (
-          <IconButton onClick={registerInCourse} sx={{ color: "white" }}>
-            <AddIcon />
-          </IconButton>
-        )}
+        {auth.logged &&
+          (mode === "remove" ? (
+            <IconButton onClick={unEnrollCourse} sx={{ color: "white" }}>
+              <CloseIcon />
+            </IconButton>
+          ) : (
+            <IconButton onClick={registerInCourse} sx={{ color: "white" }}>
+              <AddIcon />
+            </IconButton>
+          ))}
       </div>
 
       <ErrorHandler error={error} setError={setError} />

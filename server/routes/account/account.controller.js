@@ -75,7 +75,7 @@ async function removeCourse(req, res) {
     const user = await User.findById(id);
 
     if (!user || !id) {
-      return res.status(404).json({ error: "not found" });
+      return res.status(404).json({ error: "course Not found" });
     }
 
     if (
@@ -85,7 +85,7 @@ async function removeCourse(req, res) {
       !body.description ||
       !body.credits
     ) {
-      return res.status(400).json({ error: "invalid" });
+      return res.status(400).json({ error: "Invalid details" });
     }
 
     const courseExists = user.courses.find((c) => {
@@ -103,7 +103,15 @@ async function removeCourse(req, res) {
       { new: true }
     );
 
-    return res.status(200).json(updatedUser);
+    const updatedCourse = await User.findById(id).select("courses");
+
+    return res
+      .status(200)
+      .json({
+        message: "Removed",
+        updatedUser,
+        courses: updatedCourse.courses,
+      });
   } catch (err) {
     if (err) res.json({ error: err.message });
   }

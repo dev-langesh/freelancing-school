@@ -4,6 +4,7 @@ import Header from "./components/home/Header";
 import AuthContextProvider from "./context/AuthContextProvider";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Account from "./components/account";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Register />} />
+            <Route path="/account" element={<Account />} />
           </Routes>
         </BrowserRouter>
       </AuthContextProvider>
