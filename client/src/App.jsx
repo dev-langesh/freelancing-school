@@ -5,6 +5,7 @@ import AuthContextProvider from "./context/AuthContextProvider";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Account from "./components/account";
+import AddCourse from "./components/course/AddCourse";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Register />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/add-course" element={<AddCourse />} />
           </Routes>
         </BrowserRouter>
       </AuthContextProvider>

@@ -12,4 +12,16 @@ async function getCourses(req, res) {
   }
 }
 
-module.exports = { getCourses };
+async function addCourse(req, res) {
+  try {
+    const body = req.body;
+
+    const course = await Course.create(body);
+
+    res.json(course);
+  } catch (err) {
+    if (err) return res.json({ error: err.message });
+  }
+}
+
+module.exports = { getCourses, addCourse };
