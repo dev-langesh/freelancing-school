@@ -18,7 +18,9 @@ spec:
             - name: PORT
               value: "8000"
             - name: MONGO_URI
-              value: mongodb+srv://langesh:langesh@cluster0.vsn1uqo.mongodb.net/?retryWrites=true&w=majority
+              value: "mongodb://$(MONGO_SERVICE_HOST):27017"
+              # value: mongodb://10.100.231.153:27017
+              # value: mongodb+srv://langesh:langesh@cluster0.vsn1uqo.mongodb.net/?retryWrites=true&w=majority
           resources:
             limits:
               memory: "128Mi"
